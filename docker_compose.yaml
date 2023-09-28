@@ -1,5 +1,17 @@
+# docker_compose.yaml
+#
 # This is a docker compose yaml file
-# It attempts to run all then commands contained in it
+# It attempts to run all the commands contained in it
+# Basically, this file creates the two services(containers)
+# called web and db from docker images.
+# We create and start up these containers with this command:
+# docker-compose -f ./docker_compose.yaml up
+# And we shutdown and delete the containers with
+# docker-compose -f ./docker_compose.yaml down
+# This file creates an internal network with which all the containers/services 
+# in it use to communicate with themselves.
+# Because of this network, containers are able to speak with themselves just 
+# using their sevice names, like so: web, db ...
 #
 version: '3'
 services:
@@ -13,6 +25,17 @@ services:
      - 3307:3306
     environment:
      - MARIADB_ROOT_PASSWORD=johnny4U@
+       # Here we define a named volume "db-data" and map to /var/lib/mysql
+       # which is the dir on the container where mariadb stores its data.
+       # Our reason doing this in order to have data persistence in our db.
+       # With this named vol, the state of db persists even after we shutdown 
+       # and remove the db server. We find that whenever we recreate this recreate 
+       # the db using this file, we meet the database in the state it was in when 
+       # when shutdown and removed it.
+       # This is because  the data in /var/lib/mysql is saved in this folder 
+       # /var/lib/docker/volumes/review_db-data/_data on the hosts machine.
+       # This is the folder on the hosts that docker mounts at /var/lib/mysql 
+       # on the container in order to make data persitence possible.
     volumes:
      - db-data:/var/lib/mysql
 volumes:
