@@ -1,0 +1,10 @@
+# This file gives git instructions on what to ignore
+
+# Ignore all .txt files
+#*.txt
+
+# Ignore all php files
+#*.php
+
+# Ignore all files
+#*

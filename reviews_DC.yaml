@@ -1,0 +1,20 @@
+# This is a docker compose yaml file
+# It attempts to run all then commands contained in it
+#
+version: '3'
+services:
+  web:
+    image: reviews_web_1_image
+    ports:
+     - 8090:80
+  db:
+    image: mariadb
+    ports:
+     - 3307:3306
+    environment:
+     - MARIADB_ROOT_PASSWORD=johnny4U@
+    volumes:
+     - db-data:/var/lib/mysql
+volumes:
+  db-data: 
+    driver: local
