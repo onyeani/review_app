@@ -1,6 +1,6 @@
 # docker_compose.yaml
 #
-# This is a docker compose yaml file
+# This is a docker compose yaml file.
 # It attempts to run all the commands contained in it
 # Basically, this file creates the two services(containers)
 # called web and db from docker images.
