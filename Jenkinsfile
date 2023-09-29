@@ -43,6 +43,7 @@ pipeline {
             }
         }
     }
+		/*
 
     post {
         always {
@@ -57,4 +58,5 @@ pipeline {
             echo 'build failed'
         }
     }
+		*/
 }
