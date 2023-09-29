@@ -1,4 +1,4 @@
-README.txt
+README.md
 
 This file contains all the instructions a user would need in order to install and use the simple web file contained in the git repo.
 
