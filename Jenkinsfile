@@ -61,7 +61,7 @@ pipeline {
                 // Create and startup the containers/services
                 // defined in the docker_compose.yaml file
                 echo 'deploying the app ..'
-                sh "docker-compose -d -p review_app -f docker_compose.yaml up"
+                sh "docker-compose -p review_app -f docker_compose.yaml up -d"
                 echo 'Up and running. Run .sql file in db server and point your browser to be.ng:8090/reviews.html'
             }
         }
