@@ -1,3 +1,4 @@
+#!groovy
 pipeline {
     // 'agent' here tells the program where to execute. 
     // 'any' in this case means it should execute on any available 
@@ -30,7 +31,7 @@ pipeline {
                 // Start building stage
                 echo 'Building app just commenced ...'
                 // Build my docker image called app_web, version 1.0
-                //sh "docker build -t app_web:1.0 -f Dockerfile"
+                sh 'docker build -t app_web:1.0 -f Dockerfile'
                 sh "ls"
                 echo 'Build complete...'
                 
