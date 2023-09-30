@@ -16,7 +16,7 @@
 version: '3'
 services:
   web:
-    image: reviews_web_1_image
+    image: app_web:1.0
     ports:
      - 8090:80
   db:
@@ -37,7 +37,7 @@ services:
        # This is the folder on the hosts that docker mounts at /var/lib/mysql 
        # on the container in order to make data persitence possible.
     volumes:
-     - db-data:/var/lib/mysql
+     - db2-data:/var/lib/mysql
 volumes:
-  db-data: 
+  db2-data: 
     driver: local

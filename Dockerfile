@@ -1,4 +1,4 @@
-from php:7.2-apache
+FROM php:7.2-apache
 
 # Update apt repo
 RUN apt update -y
@@ -17,4 +17,5 @@ RUN apt install nano -y
 COPY ./addreview.php /var/www/html
 COPY ./reviews.html /var/www/html
 
+# Entry point. Startup apache2 web server
 CMD ["apache2-foreground"]

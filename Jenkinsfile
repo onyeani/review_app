@@ -5,6 +5,18 @@ pipeline {
     agent any
 
     stages{
+        /*
+        stage("Preliminary") {
+            steps {
+                // Here, we prepare the environment
+                echo 'shutting down running containers if any'
+                docker-compose -f docker_compose.yaml down
+                echo 'Removing last image created'
+                docker rmi app_web:1.0
+            }
+        }
+        */
+
         stage("build") {
             /* We can also use conditionals. In this case, we only implement the build
              when we are on the main branch. BRANCH_NAME is an env var that is always avilable to jenkins
@@ -15,31 +27,39 @@ pipeline {
             }
             */
             steps {
-                // Build my docker image called web, version 1.0
-                // bash 'docker build -t web:1.0 -f Dockerfile'
-                // bash 'docker run -d -p8091:80 --name webserver web:1.0'
+                // Start building stage
+                echo 'Building app just commenced ...'
+                // Build my docker image called app_web, version 1.0
+                docker build -t app_web:1.0 -f Dockerfile
+                echo 'Build complete...'
                 
-                echo 'building app ...'
+                
+                
             }
         }
         stage("test") {
             steps {
-                echo 'testing the app...'
-                // bash 'curl be.ng:8091/review.html'
-								// shutdown and remove container 'webserver'
-								// later I'd see how to put all of these in groovy script/shell script
-								// in order to declutter this Jekinsfile
-								// docker stop webserver
-								// docker rm webserver
+                echo 'Testing the app...'
+                echo 'Starting up a container from image just created'
+                docker run -d -p8091:80 --name webserver app_web:1.0
+                echo 'Checking to see if webserver is up and running...'
+                curl be.ng:8091/reviews.html
 
+                // shutdown and remove container 'webserver'
+				// later I'd see how to put all of these in groovy script/shell script
+				// in order to declutter this Jekinsfile
+                echo 'Shutting down and removing webserver'
+                docker stop webserver
+                docker rm webserver				
             }
         }
         stage("deploy") {
             steps {
                 // Create and startup the containers/services
                 // defined in the docker_compose.yaml file
-                // bash 'docker-compose -f docker_compose.yaml up'
                 echo 'deploying the app ..'
+                docker-compose -f docker_compose.yaml up
+                echo 'Up and running. Run .sql file in db server and point your browser to be.ng:8090/reviews.html'
             }
         }
     }
