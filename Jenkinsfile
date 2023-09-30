@@ -30,7 +30,7 @@ pipeline {
                 // Start building stage
                 echo 'Building app just commenced ...'
                 // Build my docker image called app_web, version 1.0
-                bash 'docker build -t app_web:1.0 -f Dockerfile'
+                bash "docker build -t app_web:1.0 -f Dockerfile"
                 echo 'Build complete...'
                 
                 
@@ -41,16 +41,16 @@ pipeline {
             steps {
                 echo 'Testing the app...'
                 echo 'Starting up a container from image just created'
-                bash 'docker run -d -p8091:80 --name webserver app_web:1.0'
+                bash "docker run -d -p8091:80 --name webserver app_web:1.0"
                 echo 'Checking to see if webserver is up and running...'
-                bash 'curl be.ng:8091/reviews.html'
+                bash "curl be.ng:8091/reviews.html"
 
                 // shutdown and remove container 'webserver'
 				// later I'd see how to put all of these in groovy script/shell script
 				// in order to declutter this Jekinsfile
                 echo 'Shutting down and removing webserver'
-                bash 'docker stop webserver'
-                bash 'docker rm webserver'				
+                bash "docker stop webserver"
+                bash "docker rm webserver"				
             }
         }
         stage("deploy") {
@@ -58,7 +58,7 @@ pipeline {
                 // Create and startup the containers/services
                 // defined in the docker_compose.yaml file
                 echo 'deploying the app ..'
-                bash 'docker-compose -f docker_compose.yaml up'
+                bash "docker-compose -f docker_compose.yaml up"
                 echo 'Up and running. Run .sql file in db server and point your browser to be.ng:8090/reviews.html'
             }
         }
