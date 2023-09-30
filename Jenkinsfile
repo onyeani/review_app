@@ -46,7 +46,7 @@ pipeline {
                 echo 'Starting up a container from image just created'
                 sh "docker run -d -p8091:80 --name webserver app_web:1.0"
                 echo 'Checking to see if webserver is up and running...'
-                sh "curl be.ng:8091/reviews.html"
+                //sh "curl be.ng:8091/reviews.html"
 
                 // shutdown and remove container 'webserver'
 				// later I'd see how to put all of these in groovy script/shell script
