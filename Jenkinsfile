@@ -30,7 +30,7 @@ pipeline {
                 // Start building stage
                 echo 'Building app just commenced ...'
                 // Build my docker image called app_web, version 1.0
-                docker build -t app_web:1.0 -f Dockerfile
+                bash 'docker build -t app_web:1.0 -f Dockerfile'
                 echo 'Build complete...'
                 
                 
