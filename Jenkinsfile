@@ -30,13 +30,15 @@ pipeline {
                 // Start building stage
                 echo 'Building app just commenced ...'
                 // Build my docker image called app_web, version 1.0
-                sh "docker build -t app_web:1.0 -f Dockerfile"
+                //sh "docker build -t app_web:1.0 -f Dockerfile"
+                sh "ls"
                 echo 'Build complete...'
                 
                 
                 
             }
         }
+        /*
         stage("test") {
             steps {
                 echo 'Testing the app...'
@@ -62,6 +64,7 @@ pipeline {
                 echo 'Up and running. Run .sql file in db server and point your browser to be.ng:8090/reviews.html'
             }
         }
+        */
     }
 		/*
 
