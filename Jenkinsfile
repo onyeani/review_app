@@ -29,6 +29,7 @@ pipeline {
             steps {
                 // Call shell script to test
                 sh './test.sh'
+            }
         }
 
         stage("deploy") {
@@ -39,6 +40,7 @@ pipeline {
         }
         
     }
+
 		/*
 
     post {
