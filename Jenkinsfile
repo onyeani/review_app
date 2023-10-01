@@ -62,7 +62,13 @@ pipeline {
                 // defined in the docker_compose.yaml file
                 echo 'deploying the app ..'
                 sh "docker-compose -p review_app -f docker_compose.yaml up -d"
-                echo 'Up and running. Run .sql file in db server and point your browser to be.ng:8090/reviews.html'
+								echo 'Setting up db'
+								// Move files from host to db server
+								sh "docker cp db_file.sql reviewapp_db_1:/"
+								sh "docker cp db_script.sh reviewapp_db_1:/"
+								// Run script on db server to create db, user, table ...
+								sh "docker exec reviewapp_db_1 ./db_script.sh"
+                echo 'All set. Point your browser to be.ng:8090/reviews.html'
             }
         }
         
