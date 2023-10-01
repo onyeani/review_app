@@ -9,8 +9,10 @@ The second container is based on a mariadb docker image.
 I will do a more comprehensice documentation once i finish my work 
  */
 
--- Create database called reviews
+-- Drop db if already in existence
+DROP DATABASE  IF EXISTS reviews;
 
+-- Create database called reviews
 CREATE DATABASE reviews;
 
 -- Switch to the database just created
