@@ -36,6 +36,8 @@ pipeline {
             steps {
                 // Call shell script to deploy
                 sh './deploy.sh'
+                sh 'docker exec reviewapp_db_1 ./db_script.sh'
+                echo 'db done'
             }
         }
         

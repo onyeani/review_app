@@ -9,6 +9,6 @@ docker cp db_file.sql reviewapp_db_1:/
 docker cp db_script.sh reviewapp_db_1:/
 echo 'file copy complete'
 # Run script on db server to create db, user, table ...
-docker exec reviewapp_db_1 ./db_script.sh
-echo 'db work complete'
+#docker exec reviewapp_db_1 ./db_script.sh
+#echo 'db work complete'
 echo 'All set. Point your browser to be.ng:8090/reviews.html'
